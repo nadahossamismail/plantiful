@@ -1,5 +1,4 @@
 <h1 align="center">
-
   Plantiful
   </h1> 
 
@@ -16,7 +15,7 @@
 <p align="center">Transform your home into a lush, green oasis with our app! Get personalized plant recommendations and expert care tips tailored to your local climate and season, making indoor gardening effortless and fun.</p>
 
 ## Installation
-To get started with Bookipedia, follow these steps:
+To get started with this project, follow these steps:
 
 1. **Clone the repository:**
     ```bash
