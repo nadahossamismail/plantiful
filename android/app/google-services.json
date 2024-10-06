@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "284706998055",
+    "project_id": "plantiful-15407",
+    "storage_bucket": "plantiful-15407.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284706998055:android:d0c2a5d85f3d189f068b02",
+        "android_client_info": {
+          "package_name": "com.example.plantiful"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKfMNMLoz0Qoe8uy0-Tx6BmhsVvGHfikI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
