@@ -10,9 +10,11 @@ class PlantsCubit extends Cubit<PlantsState> {
 
   static PlantsCubit get(context) => BlocProvider.of(context);
 
+  List<Map<String, dynamic>> gardenPlants = [];
+
   List<Plant> plants = [];
 
-  void sendRequest() async {
+  void getAllPlants() async {
     GetPlantsResponse response;
 
     emit(PlantsLoading());

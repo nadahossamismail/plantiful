@@ -12,4 +12,8 @@ final class FertilizersFailure extends FertilizersState {
   FertilizersFailure({required this.message});
 }
 
-final class FertilizersSuccess extends FertilizersState {}
+final class FertilizersSuccess extends FertilizersState {
+  final List<Fertilizer> fertilizers;
+
+  FertilizersSuccess({required this.fertilizers});
+}

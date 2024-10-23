@@ -10,9 +10,7 @@ class FertilizersCubit extends Cubit<FertilizersState> {
 
   static FertilizersCubit get(context) => BlocProvider.of(context);
 
-  List<Fertilizer> fertilizers = [];
-
-  void sendRequest() async {
+  void getFertilizers() async {
     GetFertilizerResponse response;
 
     emit(FertilizersLoading());
@@ -20,8 +18,7 @@ class FertilizersCubit extends Cubit<FertilizersState> {
     response = await GetFertilizersRequest().send();
 
     if (response.message == AppStrings.success) {
-      fertilizers = response.fertilizers;
-      emit(FertilizersSuccess());
+      emit(FertilizersSuccess(fertilizers: response.fertilizers));
     } else {
       emit(FertilizersFailure(message: response.message));
     }
