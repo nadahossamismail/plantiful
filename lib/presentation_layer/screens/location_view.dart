@@ -9,7 +9,6 @@ import 'package:plantiful/core/app_routes.dart';
 import 'package:plantiful/core/app_sizing.dart';
 import 'package:plantiful/core/app_strings.dart';
 import 'package:plantiful/main.dart';
-import 'package:plantiful/presentation_layer/widgets/alert_dialog.dart';
 
 class LocationSettingView extends StatefulWidget {
   const LocationSettingView({super.key});

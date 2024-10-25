@@ -5,7 +5,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:plantiful/core/app_colors.dart';
 import 'package:plantiful/core/app_sizing.dart';
-import 'package:plantiful/core/work_manager.dart';
+import 'package:plantiful/services/work_manager.dart';
 import 'package:plantiful/cubits/firebasefirestore/firestore_cubit.dart';
 import 'package:plantiful/data_layer.dart/models/get_plants_response.dart';
 import 'package:plantiful/presentation_layer/widgets/empty_list.dart';

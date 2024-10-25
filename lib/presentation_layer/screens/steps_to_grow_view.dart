@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:plantiful/core/app_routes.dart';
 import 'package:plantiful/core/app_sizing.dart';
 import 'package:plantiful/core/app_strings.dart';
-import 'package:plantiful/core/work_manager.dart';
+import 'package:plantiful/services/work_manager.dart';
 import 'package:plantiful/cubits/firebasefirestore/firestore_cubit.dart';
 import 'package:plantiful/data_layer.dart/models/get_plants_response.dart';
 import 'package:plantiful/presentation_layer/widgets/snack_bar.dart';

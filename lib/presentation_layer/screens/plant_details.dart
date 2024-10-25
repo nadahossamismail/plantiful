@@ -4,7 +4,7 @@ import 'package:plantiful/core/app_colors.dart';
 import 'package:plantiful/core/app_sizing.dart';
 import 'package:plantiful/cubits/firebasefirestore/firestore_cubit.dart';
 import 'package:plantiful/data_layer.dart/models/get_plants_response.dart';
-import 'package:plantiful/presentation_layer/screens/steps_to_grow.dart';
+import 'package:plantiful/presentation_layer/screens/steps_to_grow_view.dart';
 import 'package:plantiful/presentation_layer/widgets/plant_detail.dart';
 import 'package:atlas_icons/atlas_icons.dart';
 

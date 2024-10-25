@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:plantiful/app.dart';
 import 'package:plantiful/core/bloc_observer.dart';
-import 'package:plantiful/core/local_notification.dart';
+import 'package:plantiful/services/local_notification.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workmanager/workmanager.dart';
 

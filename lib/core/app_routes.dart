@@ -5,8 +5,9 @@ import 'package:plantiful/cubits/firebasefirestore/firestore_cubit.dart';
 import 'package:plantiful/cubits/plants/plants_cubit.dart';
 import 'package:plantiful/cubits/weather/weather_cubit.dart';
 import 'package:plantiful/presentation_layer/screens/garden_view.dart';
-import 'package:plantiful/presentation_layer/screens/location.dart';
+import 'package:plantiful/presentation_layer/screens/location_view.dart';
 import 'package:plantiful/presentation_layer/screens/login/login_view.dart';
+import 'package:plantiful/presentation_layer/screens/onboarding_view.dart';
 import 'package:plantiful/presentation_layer/screens/plants_view.dart';
 import 'package:plantiful/presentation_layer/screens/sign_up/sign_up.dart';
 import 'package:plantiful/presentation_layer/screens/splash_view.dart';
@@ -15,6 +16,7 @@ class Routes {
   static const String splashRoute = "/splash";
   static const String plantsRoute = "/plants";
   static const String gardenRoute = "/garden";
+  static const String onboarding = "/onboarding";
   static const String loginRoute = "/login";
   static const String signUpRoute = "/signUp";
   static const String locationSettingRoute = "/location";
@@ -26,6 +28,8 @@ class RouteGenerator {
     switch (settings.name) {
       case Routes.splashRoute:
         return MaterialPageRoute(builder: (_) => const SplashView());
+      case Routes.onboarding:
+        return MaterialPageRoute(builder: (_) => const Onboarding());
       case Routes.locationSettingRoute:
         return MaterialPageRoute(builder: (_) => const LocationSettingView());
       case Routes.loginRoute:
