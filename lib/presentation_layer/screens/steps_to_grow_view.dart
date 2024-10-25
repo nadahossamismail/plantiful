@@ -55,16 +55,18 @@ class _StepsToGrowViewState extends State<StepsToGrowView> {
                     child: Row(
                       children: <Widget>[
                         currentStep != 5
-                            ? ElevatedButton(
+                            ? OutlinedButton(
+                                style: const ButtonStyle(
+                                    elevation: MaterialStatePropertyAll(2)),
                                 onPressed: details.onStepContinue,
-                                child: const Text('NEXT'),
+                                child: const Text('Next'),
                               )
                             : const SizedBox(),
                         const SizedBox(width: 8),
                         currentStep != 0
                             ? TextButton(
                                 onPressed: details.onStepCancel,
-                                child: const Text('BACK'),
+                                child: const Text('Back'),
                               )
                             : const SizedBox(),
                       ],

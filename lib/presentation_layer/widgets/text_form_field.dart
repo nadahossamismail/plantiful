@@ -34,13 +34,11 @@ class AppTextFormField extends StatelessWidget {
           : isConfirm!
               ? VisibilityCubit.get(context).visibleConfirmPassword
               : VisibilityCubit.get(context).visiblePassword,
-      autocorrect: false,
-      enableIMEPersonalizedLearning: false,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Theme.of(context).primaryColor),
             borderRadius: const BorderRadius.all(
-              Radius.circular(20),
+              Radius.circular(24),
             )),
         labelText: label,
         prefixIcon: prefixIcon,
@@ -57,7 +55,7 @@ class AppTextFormField extends StatelessWidget {
                     .visibilityIcon(PasswordOrConfirmation.password),
         border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
-          Radius.circular(20),
+          Radius.circular(24),
         )),
       ),
     );

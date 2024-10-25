@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:plantiful/core/app_colors.dart';
 import 'package:plantiful/core/app_routes.dart';
 import 'package:plantiful/core/app_sizing.dart';
 import 'package:plantiful/cubits/login/login_cubit.dart';
@@ -57,13 +59,18 @@ class _LoginViewState extends State<LoginView> {
             child: SingleChildScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               padding: EdgeInsets.symmetric(
-                  horizontal: 20, vertical: height / AppSpacingSizing.s12),
+                  horizontal: AppSpacingSizing.s24,
+                  vertical: height / AppSpacingSizing.s8),
               child: Form(
                 key: loginViewModel.formkey,
                 child: Column(children: [
-                  const Text(
+                  Text(
                     "Login",
-                    style: TextStyle(fontSize: FontSize.f24),
+                    style: GoogleFonts.patrickHand(
+                        textStyle: const TextStyle(
+                      fontSize: 32,
+                      color: AppColors.text,
+                    )),
                   ),
                   const SizedBox(height: AppSpacingSizing.s24),
                   AppTextFormField(

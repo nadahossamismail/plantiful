@@ -82,65 +82,7 @@ class _GardenGridItemState extends State<GardenGridItem> {
 
     return GestureDetector(
       onTap: () {
-        showModalBottomSheet(
-          context: context,
-          builder: (_) {
-            var sTime = DateTime(2024, 10, 20);
-            DateFormat formater = DateFormat('dd / MM / yyyy');
-            var formatedDate = formater.format(sTime);
-            var diff = DateTime.now().difference(sTime).inDays;
-            return Container(
-              width: double.infinity,
-              margin: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: Wrap(
-                  direction: Axis.vertical,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  runAlignment: WrapAlignment.center,
-                  children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    CircularPercentIndicator(
-                      radius: 45,
-                      lineWidth: 8,
-                      animation: true,
-                      progressColor: AppColors.primary,
-                      center: Text("$diff of ${plant.getAvgHarvestDays()}"),
-                      percent: (diff / 60),
-                    ),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    Text(
-                      plant.name,
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                    Row(children: [Text(plant.wateringAmount)]),
-                    Text("Planted on: $formatedDate"),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: AppSpacingSizing.s16),
-                      child: ElevatedButton(
-                          style: const ButtonStyle(
-                              foregroundColor:
-                                  MaterialStatePropertyAll(AppColors.text),
-                              backgroundColor:
-                                  MaterialStatePropertyAll(AppColors.primary)),
-                          onPressed: () {
-                            Navigator.pop(context);
-                            FirestoreCubit.get(context)
-                                .removePlant(plant: plant);
-                            WorkManagerService()
-                                .cancleNotification(gardenPlant: plant);
-                            FirestoreCubit.get(context).getAllPlants();
-                          },
-                          child: const Text("Harvest")),
-                    ),
-                  ]),
-            );
-          },
-        );
+        gardenPlantDetails(context, plant);
       },
       child: Card(
         clipBehavior: Clip.hardEdge,
@@ -196,4 +138,60 @@ class _GardenGridItemState extends State<GardenGridItem> {
       ),
     );
   }
+}
+
+void gardenPlantDetails(context, plant) {
+  showModalBottomSheet(
+    context: context,
+    builder: (_) {
+      var sTime = DateTime.now();
+      DateFormat formater = DateFormat('dd / MM / yyyy');
+      var formatedDate = formater.format(sTime);
+      // var diff = DateTime.now().difference(sTime).inDays;
+      return Container(
+        width: double.infinity,
+        margin:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Wrap(
+            direction: Axis.vertical,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            runAlignment: WrapAlignment.center,
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              CircularPercentIndicator(
+                radius: 45,
+                lineWidth: 8,
+                animation: true,
+                progressColor: AppColors.primary,
+                center: Text("0 of ${plant.getAvgHarvestDays()}"),
+                percent: (0 / 60),
+              ),
+              const SizedBox(height: 4),
+              Text(plant.name, style: const TextStyle(fontSize: 20)),
+              Text(plant.wateringAmount),
+              Text("Planted on: $formatedDate"),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: AppSpacingSizing.s16),
+                child: ElevatedButton(
+                    style: const ButtonStyle(
+                        foregroundColor:
+                            MaterialStatePropertyAll(AppColors.text),
+                        backgroundColor:
+                            MaterialStatePropertyAll(AppColors.primary)),
+                    onPressed: () {
+                      Navigator.pop(context);
+                      FirestoreCubit.get(context).removePlant(plant: plant);
+                      WorkManagerService()
+                          .cancleNotification(gardenPlant: plant);
+                      FirestoreCubit.get(context).getAllPlants();
+                    },
+                    child: const Text("Harvest")),
+              ),
+            ]),
+      );
+    },
+  );
 }

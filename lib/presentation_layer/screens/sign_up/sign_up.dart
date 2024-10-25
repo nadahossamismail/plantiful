@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:google_fonts/google_fonts.dart';
+import 'package:plantiful/core/app_colors.dart';
 import 'package:plantiful/core/app_routes.dart';
 import 'package:plantiful/core/app_sizing.dart';
 import 'package:plantiful/cubits/sign_up/sign_up_cubit.dart';
@@ -9,7 +10,6 @@ import 'package:plantiful/presentation_layer/screens/sign_up/sign_up_viewmodel.d
 import 'package:plantiful/presentation_layer/widgets/loading.dart';
 import 'package:plantiful/presentation_layer/widgets/material_button.dart';
 import 'package:plantiful/presentation_layer/widgets/text_form_field.dart';
-
 import '../../widgets/switch_auth_method.dart';
 
 class SignUpView extends StatefulWidget {
@@ -51,17 +51,21 @@ class _SignUpViewState extends State<SignUpView> {
                 child: SingleChildScrollView(
                   keyboardDismissBehavior:
                       ScrollViewKeyboardDismissBehavior.onDrag,
-                  padding: const EdgeInsets.all(AppSpacingSizing.s24),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: AppSpacingSizing.s48,
+                      horizontal: AppSpacingSizing.s28),
                   child: Form(
                       key: signUpViewModel.formkey,
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Text(
-                              "Sign up",
-                              style: TextStyle(
-                                fontSize: FontSize.f24,
-                              ),
+                            Text(
+                              "Sign Up",
+                              style: GoogleFonts.patrickHand(
+                                  textStyle: const TextStyle(
+                                fontSize: 32,
+                                color: AppColors.text,
+                              )),
                             ),
                             const SizedBox(height: AppSpacingSizing.s32),
                             AppTextFormField(

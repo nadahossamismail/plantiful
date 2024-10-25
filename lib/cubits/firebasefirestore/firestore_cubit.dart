@@ -1,14 +1,13 @@
 import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:plantiful/core/app_strings.dart';
 import 'package:plantiful/data_layer.dart/models/get_plants_response.dart';
-
 part 'firestore_state.dart';
 
 class FirestoreCubit extends Cubit<FirestoreState> {
-  FirestoreCubit() : super(FirebasefirestoreInitial());
+  FirestoreCubit() : super(FirestoreInitial());
 
   static FirestoreCubit get(context) => BlocProvider.of(context);
   final database = FirebaseFirestore.instance;
@@ -17,24 +16,24 @@ class FirestoreCubit extends Cubit<FirestoreState> {
   addPlant({required Plant plant}) {
     emit(AddPlantLoading());
     try {
-      database.collection("garden").doc(userId).update({
-        'plants': FieldValue.arrayUnion([plant.toJson()])
+      database.collection(AppStrings.collectionName).doc(userId).update({
+        AppStrings.listKey: FieldValue.arrayUnion([plant.toJson()])
       });
       emit(AddPlantSuccess());
     } catch (e) {
-      emit(FirebasefirestoreFailure());
+      emit(FirestoreFailure());
     }
   }
 
   removePlant({required Plant plant}) {
-    emit(AddPlantLoading());
+    emit(RemovePlantLoading());
     try {
-      database.collection("garden").doc(userId).update({
-        'plants': FieldValue.arrayRemove([plant.toJson()])
+      database.collection(AppStrings.collectionName).doc(userId).update({
+        AppStrings.listKey: FieldValue.arrayRemove([plant.toJson()])
       });
-      emit(AddPlantSuccess());
+      emit(RemovePlantSuccess());
     } catch (e) {
-      emit(FirebasefirestoreFailure());
+      emit(FirestoreFailure());
     }
   }
 
@@ -42,13 +41,15 @@ class FirestoreCubit extends Cubit<FirestoreState> {
     List<dynamic> plants = [];
     emit(GetplantsLoading());
     try {
-      DocumentSnapshot documentSnapshot =
-          await database.collection("garden").doc(userId).get();
+      DocumentSnapshot documentSnapshot = await database
+          .collection(AppStrings.collectionName)
+          .doc(userId)
+          .get();
       if (documentSnapshot.exists && documentSnapshot.data() != null) {
         Map<String, dynamic> data =
             documentSnapshot.data() as Map<String, dynamic>;
-        if (data.containsKey("plants")) {
-          plants = documentSnapshot["plants"];
+        if (data.containsKey(AppStrings.listKey)) {
+          plants = documentSnapshot[AppStrings.listKey];
           emit(GetPlantsSuccess(
               gardenPlants:
                   plants.map((plant) => Plant.fromJson(plant)).toList()));
@@ -58,7 +59,7 @@ class FirestoreCubit extends Cubit<FirestoreState> {
       }
     } catch (e) {
       log("$e");
-      emit(FirebasefirestoreFailure());
+      emit(FirestoreFailure());
     }
   }
 }

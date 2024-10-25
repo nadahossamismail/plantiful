@@ -7,3 +7,16 @@ class AppColors {
   static const Color accent2 = Color(0xff3ee6e9);
   static const Color text = Color(0xff151322);
 }
+
+class AppTheme {
+  static ThemeData theme = ThemeData(
+      colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: AppColors.primary),
+      elevatedButtonTheme: const ElevatedButtonThemeData(
+          style: ButtonStyle(
+              textStyle: MaterialStatePropertyAll(
+                  TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+              backgroundColor: MaterialStatePropertyAll(AppColors.primary),
+              foregroundColor: MaterialStatePropertyAll(AppColors.text))));
+}

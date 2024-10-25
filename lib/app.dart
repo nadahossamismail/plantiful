@@ -14,20 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.generateRoute,
-        themeMode: ThemeMode.dark,
-        theme: ThemeData(
-            elevatedButtonTheme: const ElevatedButtonThemeData(
-                style: ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(
-                      AppColors.primary,
-                    ),
-                    textStyle: MaterialStatePropertyAll(TextStyle(
-                        color: AppColors.text,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16)))),
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: AppColors.primary,
-            )),
+        theme: AppTheme.theme,
         home: const SplashView());
   }
 }

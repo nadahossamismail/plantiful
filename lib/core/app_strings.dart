@@ -10,6 +10,10 @@ class AppStrings {
   static const String emailExists =
       "This email already exists, please login to your account";
   static const String stepsToGrow = "Steps to grow";
+  static const String latKey = "lat";
+  static const String lonKey = "lon";
+  static const String collectionName = "garden";
+  static const String listKey = "plants";
 }
 
 class AppImages {

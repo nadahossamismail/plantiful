@@ -30,9 +30,6 @@ class _FertilizersScreenState extends State<FertilizersScreen> {
       builder: (context, state) {
         return SafeArea(
           child: Scaffold(
-            // appBar: AppBar(
-            //   title: const Text("Fertilizers"),
-            // ),
             body: state is FertilizersLoading
                 ? Center(
                     child: LoadingAnimationWidget.waveDots(

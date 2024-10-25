@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:plantiful/core/app_colors.dart';
 import 'package:plantiful/core/app_sizing.dart';
+import 'package:plantiful/cubits/weather/weather_cubit.dart';
 
 class WeatherDetail extends StatelessWidget {
   final String? label;
@@ -36,5 +37,34 @@ class WeatherDetail extends StatelessWidget {
               )
             ],
           );
+  }
+}
+
+class WeatherPannel extends StatelessWidget {
+  final WeatherSuccess state;
+
+  const WeatherPannel({super.key, required this.state});
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          WeatherDetail(
+            label: "Temp",
+            value: "${state.weather.tempMax!.celsius!.ceil()}\u2103",
+          ),
+          WeatherDetail(
+            label: "Humidity",
+            value: "${state.weather.humidity!.ceil()}%",
+          ),
+          WeatherDetail(
+            label: "feels like",
+            value: "${state.weather.tempFeelsLike!.celsius!.ceil()}\u2103",
+          ),
+        ],
+      ),
+    );
   }
 }

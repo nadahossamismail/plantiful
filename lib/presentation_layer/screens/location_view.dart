@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
@@ -9,6 +8,7 @@ import 'package:plantiful/core/app_routes.dart';
 import 'package:plantiful/core/app_sizing.dart';
 import 'package:plantiful/core/app_strings.dart';
 import 'package:plantiful/main.dart';
+import 'package:plantiful/services/location_service.dart';
 
 class LocationSettingView extends StatefulWidget {
   const LocationSettingView({super.key});
@@ -20,31 +20,8 @@ class LocationSettingView extends StatefulWidget {
 class _LocationSettingViewState extends State<LocationSettingView> {
   @override
   void initState() {
-    getLocation();
+    LocationService.getLocationPermission(context);
     super.initState();
-  }
-
-  void getLocation() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("service disabled")));
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-
-      if (permission == LocationPermission.denied) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content:
-                Text("if you don't allow acces we can't fetch weather data!")));
-        permission = await Geolocator.requestPermission();
-      }
-    }
   }
 
   @override
@@ -69,19 +46,21 @@ class _LocationSettingViewState extends State<LocationSettingView> {
               ),
               Text(
                 "Setting your garden location!",
-                style: GoogleFonts.notoSans(
+                style: GoogleFonts.patrickHand(
                     textStyle: const TextStyle(
-                        fontSize: FontSize.f24, fontWeight: FontWeight.w700)),
+                        fontSize: FontSize.f24, fontWeight: FontWeight.w800)),
               ),
-              Text(
-                "We are going to save your geographic location in order to get weather data.",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.notoSans(
-                    textStyle: const TextStyle(fontSize: FontSize.f14)),
+              const SizedBox(
+                width: 240,
+                child: Text(
+                  "We will save your geographic location to be able to fetch weather data.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: FontSize.f16),
+                ),
               ),
               Container(
                 margin:
-                    const EdgeInsets.symmetric(vertical: AppSpacingSizing.s16),
+                    const EdgeInsets.symmetric(vertical: AppSpacingSizing.s24),
                 padding:
                     const EdgeInsets.symmetric(vertical: AppSpacingSizing.s8),
                 child: FutureBuilder(
@@ -103,10 +82,11 @@ class _LocationSettingViewState extends State<LocationSettingView> {
                           style: TextStyle(),
                         ),
                         onPressed: () {
-                          preferences.setDouble("lat", snapshot.data!.latitude);
                           preferences.setDouble(
-                              "lon", snapshot.data!.longitude);
-                          log("saved lon:${snapshot.data!.longitude}");
+                              AppStrings.latKey, snapshot.data!.latitude);
+                          preferences.setDouble(
+                              AppStrings.lonKey, snapshot.data!.longitude);
+
                           Navigator.pushReplacementNamed(
                               context, Routes.gardenRoute);
                         },
