@@ -1,12 +1,10 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:plantiful/core/app_routes.dart';
 import 'package:plantiful/core/app_sizing.dart';
-import 'package:plantiful/core/local_notification.dart';
+import 'package:plantiful/core/app_strings.dart';
 import 'package:plantiful/core/work_manager.dart';
-import 'package:plantiful/data_layer.dart/models/garden_plants.dart';
+import 'package:plantiful/cubits/firebasefirestore/firestore_cubit.dart';
 import 'package:plantiful/data_layer.dart/models/get_plants_response.dart';
 import 'package:plantiful/presentation_layer/widgets/snack_bar.dart';
 
@@ -28,26 +26,19 @@ class _StepsToGrowViewState extends State<StepsToGrowView> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            "Steps to grow",
+            AppStrings.stepsToGrow,
             style: GoogleFonts.notoSans(
                 textStyle: const TextStyle(fontSize: FontSize.f18)),
           ),
         ),
-        floatingActionButton: currentStep == 5
+        floatingActionButton: currentStep == widget.plant.stepsToGrow.length - 1
             ? FloatingActionButton(
                 child: const Text("Done"),
                 onPressed: () {
-                  DateTime now = DateTime.now();
-                  DateFormat formater = DateFormat('dd / MM / yyyy');
-
-                  gardenPlants.add(GradenPlant(
-                      plant: widget.plant, startDate: formater.format(now)));
+                  FirestoreCubit.get(context).addPlant(plant: widget.plant);
                   AppSnackBar.showSnackBar(context,
                       "Congrats, you have planted ${widget.plant.name}");
-                  WorkManagerService().registerTask(
-                      gardenPlant: GradenPlant(
-                          plant: widget.plant,
-                          startDate: formater.format(now)));
+                  WorkManagerService().registerTask(gardenPlant: widget.plant);
                   Navigator.of(context)
                       .pushReplacementNamed(Routes.gardenRoute);
                 })

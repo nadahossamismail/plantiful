@@ -42,6 +42,17 @@ class Plant {
     required this.image,
   });
 
+  int getAvgHarvestDays() {
+    RegExp regExp = RegExp(r'\d+');
+    Iterable<Match> matches = regExp.allMatches(daysToHarvest);
+
+    List<int> numbers =
+        matches.map((match) => int.parse(match.group(0)!)).toList();
+
+    int avg = (numbers.reduce((a, b) => a + b) / numbers.length).ceil();
+    return avg;
+  }
+
   factory Plant.fromJson(Map<String, dynamic> json) => Plant(
         id: json["id"],
         name: json["name"],
@@ -55,4 +66,17 @@ class Plant {
         stepsToGrow: List<String>.from(json["steps to grow"].map((x) => x)),
         image: json["image"],
       );
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "days-to-harvest": daysToHarvest,
+        "watering freq": wateringFreq,
+        "watering amount": wateringAmount,
+        "fertilizer": fertilizer,
+        "fertilization cycle": fertilizationCycle,
+        "soil": soil,
+        "temperature": temperature,
+        "steps to grow": List<dynamic>.from(stepsToGrow.map((x) => x)),
+        "image": image,
+      };
 }

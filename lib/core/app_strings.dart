@@ -9,6 +9,7 @@ class AppStrings {
   static const String notMatched = "Not matched";
   static const String emailExists =
       "This email already exists, please login to your account";
+  static const String stepsToGrow = "Steps to grow";
 }
 
 class AppImages {

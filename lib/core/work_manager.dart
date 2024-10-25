@@ -1,24 +1,19 @@
 import 'dart:developer';
 
-import 'package:plantiful/core/local_notification.dart';
-import 'package:plantiful/data_layer.dart/models/garden_plants.dart';
+import 'package:plantiful/data_layer.dart/models/get_plants_response.dart';
 
 import 'package:workmanager/workmanager.dart';
 
 class WorkManagerService {
-  Future<void> init() async {
-    Workmanager().initialize(isInDebugMode: true, callTask);
-  }
+  Future<void> init() async {}
 
-  registerTask({required GradenPlant gardenPlant}) async {
-    log("from register");
+  registerTask({required Plant gardenPlant}) async {
+    log("from registerTask ${gardenPlant.id}");
     await Workmanager().registerPeriodicTask(
-        gardenPlant.plant.id.toString(), gardenPlant.plant.name,
+        "${gardenPlant.id}", gardenPlant.name,
         frequency: const Duration(minutes: 15),
-        inputData: {
-          "plant": gardenPlant.plant.name,
-          "id": gardenPlant.plant.id
-        });
+        initialDelay: const Duration(minutes: 15),
+        inputData: {"plant": gardenPlant.name, "id": gardenPlant.id});
   }
 
   void cancleAll() async {
@@ -26,18 +21,8 @@ class WorkManagerService {
     await Workmanager().cancelAll();
   }
 
-  void cancleNotification({required GradenPlant gardenPlant}) async {
+  void cancleNotification({required Plant gardenPlant}) async {
     log("cancled");
-    await Workmanager().cancelByUniqueName(gardenPlant.plant.id.toString());
+    await Workmanager().cancelByUniqueName(gardenPlant.id.toString());
   }
-}
-
-@pragma('vm:entry-point')
-callTask() {
-  Workmanager().executeTask((task, inputData) async {
-    log("task completed + $task");
-    LocalNotificationService().showWateringNotification(
-        plantName: inputData!["plant"], id: inputData["id"]);
-    return Future.value(true);
-  });
 }

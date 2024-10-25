@@ -12,14 +12,11 @@ class PlantsGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
         padding: const EdgeInsets.only(
-            // top: AppSpacingSizing.s8,
             left: AppSpacingSizing.s12,
             bottom: AppSpacingSizing.s12,
             right: AppSpacingSizing.s12),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            //  crossAxisSpacing: AppSpacingSizing.s4,
-            mainAxisSpacing: AppSpacingSizing.s8,
-            crossAxisCount: 2),
+            mainAxisSpacing: AppSpacingSizing.s8, crossAxisCount: 2),
         itemCount: toBeDisplayedList.length,
         itemBuilder: (context, index) {
           return PlantItem(plant: toBeDisplayedList[index]);

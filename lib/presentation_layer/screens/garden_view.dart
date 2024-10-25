@@ -38,81 +38,86 @@ class _GardenViewState extends State<GardenView> {
       child: Scaffold(
         body: Column(
           children: [
-            BlocBuilder<WeatherCubit, WeatherState>(
-              builder: (context, state) {
-                return Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: AppSpacingSizing.s24,
-                          right: AppSpacingSizing.s24,
-                          top: AppSpacingSizing.s24),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Nada's garden",
-                            style: GoogleFonts.patrickHand(
-                                textStyle: const TextStyle(
-                                    fontSize: FontSize.f36,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: 1.5)),
-                          ),
-                          Row(
+            Column(
+              children: [
+                BlocBuilder<WeatherCubit, WeatherState>(
+                  builder: (context, state) {
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: AppSpacingSizing.s24,
+                              right: AppSpacingSizing.s24,
+                              top: AppSpacingSizing.s24),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const WeatherDetail(
-                                value:
-                                    "http://openweathermap.org/img/wn/10d@2x.png",
+                              Text(
+                                "Nada's garden",
+                                style: GoogleFonts.patrickHand(
+                                    textStyle: const TextStyle(
+                                        fontSize: FontSize.f36,
+                                        fontWeight: FontWeight.w500,
+                                        letterSpacing: 1.5)),
                               ),
-                              GestureDetector(
-                                child: const CircleAvatar(
-                                    backgroundColor: AppColors.primary,
-                                    child: Icon(Icons.person)),
-                                onTap: () {
-                                  log("set timer");
-                                  WorkManagerService().cancleAll();
-                                  LocalNotificationService()
-                                      .showBasicNotification();
-                                },
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    state is WeatherLoading
-                        ? LoadingAnimationWidget.progressiveDots(
-                            color: AppColors.primary, size: 25)
-                        : state is WeatherSuccess
-                            ? Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    WeatherDetail(
-                                      label: "Temp",
-                                      value:
-                                          "${state.weather.tempMax!.celsius!.ceil()}\u2103",
-                                    ),
-                                    WeatherDetail(
-                                      label: "Humidity",
-                                      value:
-                                          "${state.weather.humidity!.ceil()}%",
-                                    ),
-                                    WeatherDetail(
-                                      label: "feels like",
-                                      value:
-                                          "${state.weather.tempFeelsLike!.celsius!.ceil()}\u2103",
-                                    ),
-                                  ],
-                                ),
+                              Row(
+                                children: [
+                                  const WeatherDetail(
+                                    value:
+                                        "http://openweathermap.org/img/wn/10d@2x.png",
+                                  ),
+                                  GestureDetector(
+                                    child: const CircleAvatar(
+                                        backgroundColor: AppColors.primary,
+                                        child: Icon(Icons.person)),
+                                    onTap: () {
+                                      log("set timer");
+                                      WorkManagerService().cancleAll();
+                                      LocalNotificationService()
+                                          .showWateringNotification(
+                                              id: 6, plantName: "Tomato");
+                                    },
+                                  ),
+                                ],
                               )
-                            : const SizedBox.shrink(),
-                  ],
-                );
-              },
+                            ],
+                          ),
+                        ),
+                        state is WeatherLoading
+                            ? LoadingAnimationWidget.progressiveDots(
+                                color: AppColors.primary, size: 25)
+                            : state is WeatherSuccess
+                                ? Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        WeatherDetail(
+                                          label: "Temp",
+                                          value:
+                                              "${state.weather.tempMax!.celsius!.ceil()}\u2103",
+                                        ),
+                                        WeatherDetail(
+                                          label: "Humidity",
+                                          value:
+                                              "${state.weather.humidity!.ceil()}%",
+                                        ),
+                                        WeatherDetail(
+                                          label: "feels like",
+                                          value:
+                                              "${state.weather.tempFeelsLike!.celsius!.ceil()}\u2103",
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : const SizedBox.shrink(),
+                      ],
+                    );
+                  },
+                ),
+              ],
             ),
             const GardinGrid()
           ],

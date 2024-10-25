@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,13 +9,12 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
   static LoginCubit get(context) => BlocProvider.of(context);
+  final auth = FirebaseAuth.instance;
 
   loginUser({required String email, required String password}) async {
     emit(LoginLoading());
     try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-
+      await auth.signInWithEmailAndPassword(email: email, password: password);
       emit(LoginCompleted());
     } on FirebaseAuthException catch (e) {
       log(e.code);
@@ -27,5 +25,3 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 }
-
-void saveToken(token, name, email) {}

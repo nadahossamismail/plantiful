@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plantiful/cubits/fertilizers/fertilizers_cubit.dart';
+import 'package:plantiful/cubits/firebasefirestore/firestore_cubit.dart';
 import 'package:plantiful/cubits/plants/plants_cubit.dart';
 import 'package:plantiful/cubits/weather/weather_cubit.dart';
 import 'package:plantiful/presentation_layer/screens/garden_view.dart';
@@ -42,6 +43,7 @@ class RouteGenerator {
           builder: (_) => MultiBlocProvider(providers: [
             BlocProvider(create: (context) => WeatherCubit()),
             BlocProvider(create: (context) => FertilizersCubit()),
+            BlocProvider(create: (context) => FirestoreCubit()),
           ], child: const GardenView()),
         );
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:plantiful/core/app_colors.dart';
 import 'package:plantiful/core/app_sizing.dart';
 import 'package:plantiful/cubits/plants/plants_cubit.dart';
 import 'package:plantiful/data_layer.dart/models/get_plants_response.dart';
@@ -64,8 +65,8 @@ class _PlantsViewState extends State<PlantsView>
               },
               builder: (context, state) {
                 return state is PlantsLoading
-                    ? Loading(
-                        color: Theme.of(context).primaryColor,
+                    ? const Loading(
+                        color: AppColors.primary,
                       )
                     : state is PlantsFailure
                         ? SomethingWentWrong(

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -7,17 +8,13 @@ class LocalNotificationService {
   static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
+  static StreamController<int> streamController = StreamController();
+
   static Future init() async {
     InitializationSettings settings = const InitializationSettings(
         android: AndroidInitializationSettings("@mipmap/ic_launcher"));
     flutterLocalNotificationsPlugin.initialize(
       settings,
-      onDidReceiveBackgroundNotificationResponse: (details) {
-        log("${details.payload!}id of ");
-      },
-      onDidReceiveNotificationResponse: (details) {
-        log("${details.payload!}id of ");
-      },
     );
   }
 
@@ -25,6 +22,7 @@ class LocalNotificationService {
     NotificationDetails notificationDetails = const NotificationDetails(
         android: AndroidNotificationDetails("0", "Watering",
             color: AppColors.primary,
+            icon: "@mipmap/ic_launcher",
             importance: Importance.max,
             priority: Priority.max));
 
@@ -33,17 +31,16 @@ class LocalNotificationService {
   }
 
   showWateringNotification({required String plantName, required int id}) async {
+    log("from shownotification: $id");
+    streamController.sink.add(id);
     NotificationDetails notificationDetails = const NotificationDetails(
         android: AndroidNotificationDetails("2", "Watering",
-            showProgress: true,
+            icon: "@mipmap/ic_launcher",
             importance: Importance.max,
             priority: Priority.max));
 
-    await flutterLocalNotificationsPlugin.show(
-        id,
-        "Check your $plantName",
-        "You are doing good so far!\nIf the soil is dry, make sure to water it",
-        notificationDetails,
-        payload: id.toString());
+    await flutterLocalNotificationsPlugin.show(id, "Check your $plantName",
+        "If the soil is dry, make sure to water it", notificationDetails,
+        payload: "$id");
   }
 }
