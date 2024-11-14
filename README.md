@@ -14,6 +14,9 @@
 </p>
 <p align="center">Transform your home into a lush, green oasis with our app! Get personalized plant recommendations and expert care tips tailored to your local climate and season, making indoor gardening effortless and fun.</p>
 
+## Demo
+To see Bookipedia in action, check out the following [demo](https://drive.google.com/drive/folders/1ceU-VMkJXApKiUVMuqb0iPTiRt1Vajlp?hl=ar).
+
 ## Installation
 To get started with this project, follow these steps:
 
