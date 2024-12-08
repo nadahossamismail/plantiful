@@ -12,10 +12,23 @@
     <img src="https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual-studio-code&logoColor=white" alt="Visual Studio Code">
 
 </p>
-<p align="center">Transform your home into a lush, green oasis with our app! Get personalized plant recommendations and expert care tips tailored to your local climate and season, making indoor gardening effortless and fun.</p>
+<p align="center">Plantiful is your ultimate gardening companion, offering personalized plant guides, real-time weather insights, and smart reminders—all wrapped in a user-friendly design to make growing and caring for plants simple and joyful.</p>
 
 ## Demo
-To see Bookipedia in action, check out the following [demo](https://drive.google.com/drive/folders/1ceU-VMkJXApKiUVMuqb0iPTiRt1Vajlp?hl=ar).
+To see Plantiful in action, check out the following [demo](https://drive.google.com/drive/folders/1ceU-VMkJXApKiUVMuqb0iPTiRt1Vajlp?hl=ar).
+
+## Features 
+- **Effortless Sign-In:** Keep your gardening personalized and secure with Firebase-powered authentication that's quick and easy.
+
+- **Your Digital Garden Hub:** Save and track all your plants effortlessly, with all your data safely stored in the cloud using Firestore.
+
+- **Expert Plant Care Guides:** Explore a world of plants with detailed, API-powered guides on how to grow and fertilize them like a pro.
+
+- **Smart Weather Insights:** Get real-time weather updates for your location, helping you make the best decisions for your plants.
+
+- **Never Miss a Watering:** Stay on top of your plant care with customizable watering reminders to keep your greenery thriving.
+
+- **Intuitive and Beautiful Design:** Enjoy a sleek and user-friendly interface that makes gardening fun and stress-free.
 
 ## Installation
 To get started with this project, follow these steps:
